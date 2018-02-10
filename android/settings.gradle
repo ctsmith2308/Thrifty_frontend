@@ -1,0 +1,3 @@
+rootProject.name = 'Thrifty_frontend'
+
+include ':app'
