@@ -1,24 +1,25 @@
 const INITIAL_STATE = {
   email: '',
   password: '',
-  user:null,
+  userID:null,
   error: '',
   loading: false
 }
 import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, LOGIN_USER } from '../actions/types'
 
 export default (state = INITIAL_STATE, action) => {
+  console.log('action that was dispatched', action.type);
   switch (action.type){
     case EMAIL_CHANGED:
     return { ...state, email: action.payload }
     case PASSWORD_CHANGED:
     return { ...state, password: action.payload }
     case LOGIN_USER_SUCCESS:
-    return { ...state, user: action.payload, ...INITIAL_STATE, error: '', }
+    return { ...state, userID: action.payload, ...INITIAL_STATE, error: '', loading:'false' }
     case LOGIN_USER_FAIL:
-    return { ...state, error: 'Authentication Failed.'}
+    return { ...state, error: 'Authentication Failed.', loading:'false' }
     case LOGIN_USER:
-    return {...state, loading: true, error: '', loading:false}
+    return {...state, loading: true, error: '',}
     default:
      return state
   }

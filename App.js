@@ -17,20 +17,20 @@ import { firebaseConfig } from './keys/FirebaseConfig'
 export default class App extends Component {
 
   componentWillMount(){
-    const config = firebaseConfig
-  //   {
-  //   apiKey: "AIzaSyADDIob6LpAMxOQAX7LULEt1cvSMvEgdfc",
-  //   authDomain: "thrifty-d5770.firebaseapp.com",
-  //   databaseURL: "https://thrifty-d5770.firebaseio.com",
-  //   projectId: "thrifty-d5770",
-  //   storageBucket: "",
-  //   messagingSenderId: "130986283742"
-  // };
+    const config = {
+    apiKey: "AIzaSyADDIob6LpAMxOQAX7LULEt1cvSMvEgdfc",
+    authDomain: "thrifty-d5770.firebaseapp.com",
+    databaseURL: "https://thrifty-d5770.firebaseio.com",
+    projectId: "thrifty-d5770",
+    storageBucket: "",
+    messagingSenderId: "130986283742"
+  };
   firebase.initializeApp(config);
   }
 
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+    console.disableYellowBox = true
     return (
       <Provider store={ store }>
         <LoginForm/>
