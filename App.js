@@ -1,18 +1,16 @@
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Text, View } from 'react-native';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import reducers from './src/reducers'
 import firebase from 'firebase'
 import ReduxThunk from 'redux-thunk'
-import LoginForm from './src/components/LoginForm'
+
+import reducers from './src/reducers'
 import { firebaseConfig } from './keys/FirebaseConfig'
+
+import LoginForm from './src/components/LoginForm'
+import FluxRouter from './src/components/FluxRouter'
 
 export default class App extends Component {
 
@@ -33,8 +31,8 @@ export default class App extends Component {
     console.disableYellowBox = true
     return (
       <Provider store={ store }>
-        <LoginForm/>
+        <FluxRouter/>
       </Provider>
-    );
+    )
   }
 }

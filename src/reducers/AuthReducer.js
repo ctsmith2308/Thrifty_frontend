@@ -1,6 +1,6 @@
 const INITIAL_STATE = {
-  email: '',
-  password: '',
+  email: 'chris@chris.com',
+  password: 'password',
   userID:null,
   error: '',
   loading: false
