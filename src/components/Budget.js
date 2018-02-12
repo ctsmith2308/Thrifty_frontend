@@ -34,6 +34,13 @@ class Budget extends Component {
     this.props.miscellaneousChanged(text)
   }
 
+  onSubmitBudget=()=>{
+    // console.log('I was pressed')
+    // console.log(this.props.budget)
+    // console.log(this.props.token)
+    this.props.budgetPostRequest(this.props.budget, this.props.token)
+  }
+
   render(){
     return(
       <ScrollView>
@@ -44,7 +51,7 @@ class Budget extends Component {
             label="Utilites"
             placeholder="$0.00"
             onChangeText={this.onUtilitiesChange.bind(this)}
-            value ={ 1 }
+            value ={this.props.utilities }
             />
         </CardSection>
           <CardSection>
@@ -52,7 +59,7 @@ class Budget extends Component {
               label="Transportation"
               placeholder="$0.00"
               onChangeText={this.onTransportationChange.bind(this)}
-              value ={ 1 }
+              value ={ this.props.transportation }
               />
           </CardSection>
           <CardSection>
@@ -60,7 +67,7 @@ class Budget extends Component {
               label="Groceries"
               placeholder="$0.00"
               onChangeText={this.onGroceriesChange.bind(this)}
-              value ={ 1 }
+              value ={ this.props.groceries }
               />
           </CardSection>
           <CardSection>
@@ -68,7 +75,7 @@ class Budget extends Component {
               label="Savings"
               placeholder="$0.00"
               onChangeText={this.onSavingsChange.bind(this)}
-              value ={ 1 }
+              value ={ this.props.savings }
               />
           </CardSection>
           <CardSection>
@@ -76,7 +83,7 @@ class Budget extends Component {
               label="Entertainment"
               placeholder="$0.00"
               onChangeText={this.onEntertainmentChange.bind(this)}
-              value ={ 1 }
+              value ={ this.props.entertainment }
               />
           </CardSection>
           <CardSection>
@@ -84,7 +91,7 @@ class Budget extends Component {
               label="Clothing"
               placeholder="$0.00"
               onChangeText={this.onClothingChange.bind(this)}
-              value ={ 1 }
+              value ={ this.props.clothing }
               />
           </CardSection>
           <CardSection>
@@ -92,7 +99,7 @@ class Budget extends Component {
               label="Emergency"
               placeholder="$0.00"
               onChangeText={this.onEmergencyChange.bind(this)}
-              value ={ 1 }
+              value ={ this.props.emergency }
               />
           </CardSection>
           <CardSection>
@@ -100,11 +107,11 @@ class Budget extends Component {
               label="Miscellaneous"
               placeholder="$0.00"
               onChangeText={this.onMiscellaneousChange.bind(this)}
-              value ={ 1 }
+              value ={ this.props.miscellaneous }
               />
           </CardSection>
           <View style={{height:50, marginTop:10, marginLeft:25, marginRight:25}}>
-            <Button onPress={ ()=>console.log('i')}>
+            <Button onPress={ () => this.onSubmitBudget()}>
               Submit
             </Button>
           </View>
@@ -114,8 +121,10 @@ class Budget extends Component {
   }
 }
 
-mapStateToProps = (budget) => {
-  return { budget }
+mapStateToProps = ( { auth, budget } ) => {
+  let { token } = auth
+  let { utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous } = budget
+  return { token, budget, utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous }
 }
 
 export default connect(mapStateToProps, {utilitiesChanged, transportationChanged, groceriesChanged, savingsChanged, entertainmentChanged, clothingChanged, emergencyChanged, miscellaneousChanged

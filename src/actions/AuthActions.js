@@ -23,8 +23,7 @@ const apiGetRequest = (dispatch, token) => {
   axios.get(getURL, {headers:{ 'x-access-token':token }})
   .then(response => {
     let userID = response.data.id
-    console.log('user id in get req', userID);
-    loginUserSuccess(dispatch, userID)
+    loginUserSuccess(dispatch, userID, token)
   })
   .catch( error => {
     console.log('error from apiGetRequest ==>', error);
@@ -37,7 +36,7 @@ const apiPostRequest = (dispatch, token) => {
   axios.post(postURL, postBody, {headers:{'x-access-token':token}})
   .then(response => {
     let userID = response.data.id
-    loginUserSuccess(dispatch, userID)
+    loginUserSuccess(dispatch, userID, token)
   })
   .catch( error => {
     console.log('error from apiPostRequest ==>', error);
@@ -69,11 +68,10 @@ const loginUserFail = (dispatch) => {
   dispatch({ type: LOGIN_USER_FAIL })
 }
 
-const loginUserSuccess = (dispatch, userID) => {
-  console.log('userid in success action creator', userID);
+const loginUserSuccess = (dispatch, userID, token) => {
   dispatch({
     type: LOGIN_USER_SUCCESS,
-    payload: userID
+    payload: { userID, token }
   })
   Actions.tabNavigator()
 }

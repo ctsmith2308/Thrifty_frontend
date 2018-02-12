@@ -57,28 +57,28 @@ export const miscellaneousChanged = (input) =>{
   }
 }
 
-// const apiGetRequest = (dispatch, token) => {
-//   let getURL = `http://localhost:3000/users/${token}`
-//   axios.get(getURL, {headers:{ 'x-access-token':token }})
-//   .then(response => {
-//     let userID = response.data.id
-//     console.log('user id in get req', userID);
-//     // loginUserSuccess(dispatch, userID)
-//   })
-//   .catch( error => {
-//     console.log('error from apiGetRequest ==>', error);
-//   })
-// }
-//
-// const apiPostRequest = (dispatch, token) => {
-//   let postURL = 'http://localhost:3000/users'
-//   let postBody = { token }
-//   axios.post(postURL, postBody, {headers:{'x-access-token':token}})
-//   .then(response => {
-//     let userID = response.data.id
-//     // loginUserSuccess(dispatch, userID)
-//   })
-//   .catch( error => {
-//     console.log('error from apiPostRequest ==>', error);
-//   })
-// }
+const budgetGetRequest = (dispatch, token) => {
+  let getURL = `http://localhost:3000/users/${token}`
+  axios.get(getURL, {headers:{ 'x-access-token':token }})
+  .then(response => {
+    let userID = response.data.id
+    console.log('user id in get req', userID);
+    // loginUserSuccess(dispatch, userID)
+  })
+  .catch( error => {
+    console.log('error from apiGetRequest ==>', error);
+  })
+}
+
+const budgetPostRequest = (dispatch, token) => {
+  let postURL = 'http://localhost:3000/users'
+  let postBody = { token }
+  axios.post(postURL, postBody, {headers:{'x-access-token':token}})
+  .then(response => {
+    let userID = response.data.id
+    // loginUserSuccess(dispatch, userID)
+  })
+  .catch( error => {
+    console.log('error from apiPostRequest ==>', error);
+  })
+}
