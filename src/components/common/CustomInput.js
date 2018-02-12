@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { TextInput, View, Text } from 'react-native'
 
-const Input = ({label, value, onChangeText, placeholder, secureTextEntry}) => {
+const CustomInput = ({label, value, onChangeText, placeholder, secureTextEntry}) => {
   const { inputStyle, labelStyle, containerStyle } = styles
   return(
     <View style={containerStyle}>
@@ -21,17 +21,16 @@ const styles = {
   inputStyle:{
     color:'#000',
     paddingRight:5,
-    paddingLeft:5,
+    paddingLeft:15,
     fontSize:18,
     lineHeight:23,
-    flex:2,
+    flex:1,
   },
   labelStyle:{
     fontSize:18,
-    paddingLeft:20,
-    flex:1,
-    paddingBottom:4
-
+    paddingLeft:30,
+    paddingBottom:4,
+    flex:1
   },
   containerStyle:{
     height:40,
@@ -40,4 +39,4 @@ const styles = {
     alignItems:'center'
   }
 }
-export {Input}
+export {CustomInput}

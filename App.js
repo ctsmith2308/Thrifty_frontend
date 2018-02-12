@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import firebase from 'firebase'
 import ReduxThunk from 'redux-thunk'
+import logger from 'redux-logger'
 
 import reducers from './src/reducers'
 import { firebaseConfig } from './keys/FirebaseConfig'
@@ -27,7 +28,7 @@ export default class App extends Component {
   }
 
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger))
     console.disableYellowBox = true
     return (
       <Provider store={ store }>

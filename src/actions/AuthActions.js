@@ -23,6 +23,7 @@ const apiGetRequest = (dispatch, token) => {
   axios.get(getURL, {headers:{ 'x-access-token':token }})
   .then(response => {
     let userID = response.data.id
+    console.log('user id in get req', userID);
     loginUserSuccess(dispatch, userID)
   })
   .catch( error => {
@@ -69,9 +70,10 @@ const loginUserFail = (dispatch) => {
 }
 
 const loginUserSuccess = (dispatch, userID) => {
+  console.log('userid in success action creator', userID);
   dispatch({
     type: LOGIN_USER_SUCCESS,
-    payload:userID
+    payload: userID
   })
   Actions.tabNavigator()
 }

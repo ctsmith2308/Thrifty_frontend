@@ -1,5 +1,16 @@
+//AUTH ACTIONS
 export const EMAIL_CHANGED = 'email_changed'
 export const PASSWORD_CHANGED = 'password_changed'
 export const LOGIN_USER_SUCCESS = 'login_user_success'
 export const LOGIN_USER_FAIL = 'login_user_fail'
 export const LOGIN_USER ='login_user'
+
+//BUDGET ACTIONS
+export const UTILITIES_CHANGED = 'utilities_changed'
+export const TRANSPORTATION_CHANGED = 'transportation_changed'
+export const GROCERIES_CHANGED = 'groceries_changed'
+export const SAVINGS_CHANGED = 'savings_changed'
+export const ENTERTAINMENT_CHANGED = 'entertainment_changed'
+export const CLOTHING_CHANGED = 'clothing_changed'
+export const EMERGENCY_CHANGED = 'emergency_changed'
+export const MISCELLANEOUS_CHANGED = 'miscellaneous_changed'
