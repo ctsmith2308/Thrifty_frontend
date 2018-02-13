@@ -4,5 +4,5 @@ import BudgetReducer from './BudgetReducer'
 
 export default combineReducers({
   auth: AuthReducer,
-  budget: BudgetReducer
+  userBudget: BudgetReducer
 })

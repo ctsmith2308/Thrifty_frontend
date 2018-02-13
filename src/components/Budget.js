@@ -4,11 +4,18 @@ import { connect } from 'react-redux'
 import { Card, CardSection, Input, CustomInput, Button, Spinner } from './common'
 
 import {
-utilitiesChanged, transportationChanged, groceriesChanged, savingsChanged, entertainmentChanged, clothingChanged, emergencyChanged, miscellaneousChanged
+totalBudgetChanged, utilitiesChanged, transportationChanged, groceriesChanged, savingsChanged, entertainmentChanged, clothingChanged, emergencyChanged, miscellaneousChanged, budgetGetRequest, budgetPostRequest
 } from '../actions'
 
 class Budget extends Component {
 
+  componentWillMount(){
+    this.props.budgetGetRequest(this.props.userID, this.props.token)
+  }
+
+  onTotalBudgetChange(text){
+    this.props.totalBudgetChanged(text)
+  }
   onUtilitiesChange(text){
     this.props.utilitiesChanged(text)
   }
@@ -33,101 +40,106 @@ class Budget extends Component {
   onMiscellaneousChange(text){
     this.props.miscellaneousChanged(text)
   }
-
   onSubmitBudget=()=>{
-    // console.log('I was pressed')
-    // console.log(this.props.budget)
-    // console.log(this.props.token)
-    this.props.budgetPostRequest(this.props.budget, this.props.token)
+    this.props.budgetPostRequest(this.props.userID, this.props.userBudget, this.props.token)
   }
 
   render(){
     return(
       <ScrollView>
-      <View style={styles.containerStyle}>
-      <Text style={{alignSelf:'center', fontSize:35, marginTop:45, marginBottom:20, fontWeight:'bold', color:'#606060'}}>My Budget</Text>
-        <CardSection>
-          <CustomInput
-            label="Utilites"
-            placeholder="$0.00"
-            onChangeText={this.onUtilitiesChange.bind(this)}
-            value ={this.props.utilities }
-            />
-        </CardSection>
+        <View style={styles.containerStyle}>
+          <Text style={{marginTop:35}}></Text>
           <CardSection>
             <CustomInput
-              label="Transportation"
-              placeholder="$0.00"
-              onChangeText={this.onTransportationChange.bind(this)}
-              value ={ this.props.transportation }
+              label="Total Budget"
+              placeholder="0.00"
+              onChangeText={this.onTotalBudgetChange.bind(this)}
+              value ={this.props.total_budget }
               />
           </CardSection>
           <CardSection>
             <CustomInput
-              label="Groceries"
-              placeholder="$0.00"
-              onChangeText={this.onGroceriesChange.bind(this)}
-              value ={ this.props.groceries }
+              label="Utilites"
+              placeholder="0.00"
+              onChangeText={this.onUtilitiesChange.bind(this)}
+              value ={this.props.utilities }
               />
           </CardSection>
-          <CardSection>
-            <CustomInput
-              label="Savings"
-              placeholder="$0.00"
-              onChangeText={this.onSavingsChange.bind(this)}
-              value ={ this.props.savings }
-              />
-          </CardSection>
-          <CardSection>
-            <CustomInput
-              label="Entertainment"
-              placeholder="$0.00"
-              onChangeText={this.onEntertainmentChange.bind(this)}
-              value ={ this.props.entertainment }
-              />
-          </CardSection>
-          <CardSection>
-            <CustomInput
-              label="Clothing"
-              placeholder="$0.00"
-              onChangeText={this.onClothingChange.bind(this)}
-              value ={ this.props.clothing }
-              />
-          </CardSection>
-          <CardSection>
-            <CustomInput
-              label="Emergency"
-              placeholder="$0.00"
-              onChangeText={this.onEmergencyChange.bind(this)}
-              value ={ this.props.emergency }
-              />
-          </CardSection>
-          <CardSection>
-            <CustomInput
-              label="Miscellaneous"
-              placeholder="$0.00"
-              onChangeText={this.onMiscellaneousChange.bind(this)}
-              value ={ this.props.miscellaneous }
-              />
-          </CardSection>
-          <View style={{height:50, marginTop:10, marginLeft:25, marginRight:25}}>
-            <Button onPress={ () => this.onSubmitBudget()}>
-              Submit
-            </Button>
-          </View>
-      </View>
+            <CardSection>
+              <CustomInput
+                label="Transportation"
+                placeholder="0.00"
+                onChangeText={this.onTransportationChange.bind(this)}
+                value ={ this.props.transportation }
+                />
+            </CardSection>
+            <CardSection>
+              <CustomInput
+                label="Groceries"
+                placeholder="0.00"
+                onChangeText={this.onGroceriesChange.bind(this)}
+                value ={ this.props.groceries }
+                />
+            </CardSection>
+            <CardSection>
+              <CustomInput
+                label="Savings"
+                placeholder="0.00"
+                onChangeText={this.onSavingsChange.bind(this)}
+                value ={ this.props.savings }
+                />
+            </CardSection>
+            <CardSection>
+              <CustomInput
+                label="Entertainment"
+                placeholder="0.00"
+                onChangeText={this.onEntertainmentChange.bind(this)}
+                value ={ this.props.entertainment }
+                />
+            </CardSection>
+            <CardSection>
+              <CustomInput
+                label="Clothing"
+                placeholder="0.00"
+                onChangeText={this.onClothingChange.bind(this)}
+                value ={ this.props.clothing }
+                />
+            </CardSection>
+            <CardSection>
+              <CustomInput
+                label="Emergency"
+                placeholder="0.00"
+                onChangeText={this.onEmergencyChange.bind(this)}
+                value ={ this.props.emergency }
+                />
+            </CardSection>
+            <CardSection>
+              <CustomInput
+                label="Miscellaneous"
+                placeholder="0.00"
+                onChangeText={this.onMiscellaneousChange.bind(this)}
+                value ={ this.props.miscellaneous }
+                />
+            </CardSection>
+            <View style={{height:50, marginTop:10, marginLeft:25, marginRight:25}}>
+              <Button onPress={ () => { this.onSubmitBudget() }}>
+                Submit
+              </Button>
+            </View>
+        </View>
       </ScrollView>
     )
   }
 }
 
-mapStateToProps = ( { auth, budget } ) => {
-  let { token } = auth
-  let { utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous } = budget
-  return { token, budget, utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous }
+mapStateToProps = ( { auth, userBudget } ) => {
+  let { userID, token } = auth
+  let { total_budget, utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous } = userBudget
+
+  return { userID, token, total_budget, userBudget, utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous }
 }
 
-export default connect(mapStateToProps, {utilitiesChanged, transportationChanged, groceriesChanged, savingsChanged, entertainmentChanged, clothingChanged, emergencyChanged, miscellaneousChanged
+export default connect(mapStateToProps, {totalBudgetChanged, utilitiesChanged, transportationChanged, groceriesChanged, savingsChanged, entertainmentChanged, clothingChanged, emergencyChanged, miscellaneousChanged, budgetGetRequest, budgetPostRequest
 })(Budget)
 
 const styles = {

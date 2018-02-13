@@ -3,12 +3,18 @@ import axios from 'axios'
 import { Actions } from 'react-native-router-flux'
 
 import {
-  UTILITIES_CHANGED, TRANSPORTATION_CHANGED, GROCERIES_CHANGED,
-  SAVINGS_CHANGED, ENTERTAINMENT_CHANGED, CLOTHING_CHANGED,
-  EMERGENCY_CHANGED, MISCELLANEOUS_CHANGED
+  TOTAL_BUDGET_CHANGED, UTILITIES_CHANGED, TRANSPORTATION_CHANGED, GROCERIES_CHANGED,
+  SAVINGS_CHANGED, ENTERTAINMENT_CHANGED, CLOTHING_CHANGED, EMERGENCY_CHANGED,
+  MISCELLANEOUS_CHANGED, BUDGET_GET_SUCCESS, BUDGET_POST_SUCCESS
 } from './types'
 
-export const utilitiesChanged = (input) =>{
+export const totalBudgetChanged = (input) => {
+  return {
+    type: TOTAL_BUDGET_CHANGED,
+    payload: input
+  }
+}
+export const utilitiesChanged = (input) => {
   return {
     type: UTILITIES_CHANGED,
     payload: input
@@ -57,28 +63,48 @@ export const miscellaneousChanged = (input) =>{
   }
 }
 
-const budgetGetRequest = (dispatch, token) => {
-  let getURL = `http://localhost:3000/users/${token}`
-  axios.get(getURL, {headers:{ 'x-access-token':token }})
-  .then(response => {
-    let userID = response.data.id
-    console.log('user id in get req', userID);
-    // loginUserSuccess(dispatch, userID)
-  })
-  .catch( error => {
-    console.log('error from apiGetRequest ==>', error);
-  })
+export const budgetGetRequest = (userID, token) => {
+  return(dispatch)=>{
+    let getURL = `http://localhost:3000/budget/${userID}`
+    axios.get(getURL, {headers:{ 'x-access-token':token }})
+    .then(response => {
+      console.log('response from get', response);
+      budgetGetSuccess(dispatch, response.data)
+    })
+    .catch( error => {
+      console.log('error from apiGetRequest ==>', error);
+    })
+  }
 }
 
-const budgetPostRequest = (dispatch, token) => {
-  let postURL = 'http://localhost:3000/users'
-  let postBody = { token }
-  axios.post(postURL, postBody, {headers:{'x-access-token':token}})
-  .then(response => {
-    let userID = response.data.id
-    // loginUserSuccess(dispatch, userID)
-  })
-  .catch( error => {
-    console.log('error from apiPostRequest ==>', error);
-  })
+export const budgetPostRequest = (userID, budget, token) => {
+  return(dispatch)=>{
+    let postURL = 'http://localhost:3000/budget'
+    let postBody = {user_id:userID}
+    Object.keys(budget).forEach(element => {
+      postBody[element] = Number(budget[element])
+    })
+    axios.post(postURL, postBody, {headers:{'x-access-token':token}})
+    .then(response => {
+      console.log(response);
+      budgetPostSuccess(dispatch)
+    })
+    .catch( error => {
+      console.log('error from apiPostRequest ==>', error);
+    })
+  }
+}
+
+const budgetGetSuccess=(dispatch, data)=>{
+    console.log('data in get success', data);
+    dispatch({
+      type: BUDGET_GET_SUCCESS,
+      payload: data
+    })
+}
+const budgetPostSuccess=(dispatch, budget)=>{
+    dispatch({
+      type: BUDGET_POST_SUCCESS,
+      payload: budget
+    })
 }
