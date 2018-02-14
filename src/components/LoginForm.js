@@ -50,7 +50,7 @@ class LoginForm extends Component {
     return(
       <KeyboardAvoidingView behavior={"padding"} style={styles.containerStyle}>
       <ScrollView>
-      <Text style={{alignSelf:'center', fontSize:85, marginTop:100, fontWeight:'bold', color:'#606060'}}>Thrifty</Text>
+      <Text style={{alignSelf:'center', fontSize:85, marginTop:85, fontWeight:'bold', color:'#606060'}}>Thrifty</Text>
       <Image
       style={{width:200,height:200, alignSelf:'center', marginBottom:20, marginTop:10}}
       source={require('../../wallet.png')}
@@ -96,7 +96,7 @@ export default connect(mapStateToProps, { emailChanged, passwordChanged, loginUs
 const styles = {
   containerStyle:{
     flex:1,
-    backgroundColor:'#e6ffe6',
+    // backgroundColor:'#e6ffe6',
   },
   errorTextStyle:{
     fontSize: 20,

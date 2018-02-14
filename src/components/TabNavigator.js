@@ -5,7 +5,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux'
 import { Container, Header, Content, Tab, Tabs, TabHeading, Icon } from 'native-base';
 
 import Budget from './Budget';
-import Camera from './Camera';
+import SnapPhoto from './SnapPhoto';
 import Stats from './Stats';
 
 class TabNavigator extends Component {
@@ -14,14 +14,14 @@ class TabNavigator extends Component {
       <Container>
         <Tabs
           tabBarUnderlineStyle={{backgroundColor:'transparent'}}
-          initialPage={0}
+          initialPage={1}
           tabBarPosition='bottom'
         >
         <Tab heading="Budget">
           <Budget />
         </Tab>
         <Tab heading="Camera">
-          <Camera />
+          <SnapPhoto />
         </Tab>
         <Tab heading="Stats">
           <Stats />

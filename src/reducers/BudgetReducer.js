@@ -5,15 +5,15 @@ import {
 } from '../actions/types'
 
 const INITIAL_STATE = {
-  total_budget: '',
-  utilities:'',
-  transportation: '',
-  groceries: '',
-  savings: '',
-  entertainment: '',
-  clothing: '',
-  emergency: '',
-  miscellaneous: ''
+  total_budget: '500',
+  utilities:'65',
+  transportation: '54',
+  groceries: '23',
+  savings: '70',
+  entertainment: '50',
+  clothing: '45',
+  emergency: '50',
+  miscellaneous: '32'
 }
 export default (state = INITIAL_STATE, action) => {
   switch (action.type){
@@ -38,15 +38,15 @@ export default (state = INITIAL_STATE, action) => {
     case BUDGET_GET_SUCCESS:
     return {
       ...state,
-      total_budget: action.payload.total_budget.toString(),
-      utilities: action.payload.utilities.toString(),
-      transportation: action.payload.transportation.toString(),
-      groceries: action.payload.groceries.toString(),
-      savings: action.payload.savings.toString(),
-      entertainment: action.payload.entertainment.toString(),
-      clothing: action.payload.clothing.toString(),
-      emergency: action.payload.emergency.toString(),
-      miscellaneous: action.payload.emergency.toString()
+      total_budget: action.payload.total_budget,
+      utilities: action.payload.utilities,
+      transportation: action.payload.transportation,
+      groceries: action.payload.groceries,
+      savings: action.payload.savings,
+      entertainment: action.payload.entertainment,
+      clothing: action.payload.clothing,
+      emergency: action.payload.emergency,
+      miscellaneous: action.payload.emergency
     }
     case BUDGET_POST_SUCCESS:
     return { ...state }

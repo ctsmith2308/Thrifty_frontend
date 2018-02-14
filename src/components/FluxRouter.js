@@ -6,13 +6,16 @@ import  TabNavigator  from './TabNavigator'
 
 const FluxRouter=()=>{
   return (
-    <Router
-    navigationBarStyle={{ backgroundColor: '#e6ffe6' }}>
-    <Scene hideNavBar
+    <Router>
+    <Scene
+          hideNavBar
           navBar={null}
           key="login"
           component={ LoginForm }/>
-      <Scene key="tabNavigator" component={ TabNavigator }/>
+      <Scene key="tabNavigator"   hideNavBar
+        navBar={null} component={ TabNavigator }
+        initial
+        />
     </Router>
   )
 }

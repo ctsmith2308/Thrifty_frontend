@@ -9,9 +9,9 @@ totalBudgetChanged, utilitiesChanged, transportationChanged, groceriesChanged, s
 
 class Budget extends Component {
 
-  componentWillMount(){
-    this.props.budgetGetRequest(this.props.userID, this.props.token)
-  }
+  // componentWillMount(){
+  //   this.props.budgetGetRequest(this.props.userID, this.props.token)
+  // }
 
   onTotalBudgetChange(text){
     this.props.totalBudgetChanged(text)
@@ -51,10 +51,10 @@ class Budget extends Component {
           <Text style={{marginTop:35}}></Text>
           <CardSection>
             <CustomInput
-              label="Total Budget"
+              label="Total Budget$"
               placeholder="0.00"
               onChangeText={this.onTotalBudgetChange.bind(this)}
-              value ={this.props.total_budget }
+              value = {this.props.total_budget }
               />
           </CardSection>
           <CardSection>
@@ -121,7 +121,7 @@ class Budget extends Component {
                 value ={ this.props.miscellaneous }
                 />
             </CardSection>
-            <View style={{height:50, marginTop:10, marginLeft:25, marginRight:25}}>
+            <View style={{height:50, marginTop:10, marginLeft:25, marginRight:25, height:55}}>
               <Button onPress={ () => { this.onSubmitBudget() }}>
                 Submit
               </Button>
@@ -145,7 +145,7 @@ export default connect(mapStateToProps, {totalBudgetChanged, utilitiesChanged, t
 const styles = {
   containerStyle:{
     flex:1,
-    backgroundColor:'#e6ffe6',
+    // backgroundColor:'#e6ffe6',
     paddingBottom:75
   }
 }

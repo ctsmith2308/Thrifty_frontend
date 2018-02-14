@@ -69,7 +69,9 @@ export const budgetGetRequest = (userID, token) => {
     axios.get(getURL, {headers:{ 'x-access-token':token }})
     .then(response => {
       console.log('response from get', response);
-      budgetGetSuccess(dispatch, response.data)
+      // budgetGetSuccess(dispatch, response.data)
+      budgetGetSuccess(dispatch)
+
     })
     .catch( error => {
       console.log('error from apiGetRequest ==>', error);
@@ -95,11 +97,12 @@ export const budgetPostRequest = (userID, budget, token) => {
   }
 }
 
-const budgetGetSuccess=(dispatch, data)=>{
-    console.log('data in get success', data);
+const budgetGetSuccess=(dispatch)=>{
+  // add data prop once psql db is assessed/fixed
+    console.log('data in get success');
     dispatch({
       type: BUDGET_GET_SUCCESS,
-      payload: data
+      // payload: data
     })
 }
 const budgetPostSuccess=(dispatch, budget)=>{
