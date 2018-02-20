@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Platform, Button} from "react-native";
+import { Platform, Button, TouchableOpacity } from "react-native";
 import { Container, Header, Title, Content, Icon, Text, Right, Body, Left, Picker, Form, Item as FormItem } from "native-base";
 import { connect } from 'react-redux'
 
@@ -19,7 +19,6 @@ class Confirmation extends Component {
     }
 
   onValueChange(value){
-    console.log('here is the value', value);
     this.setState({
       selectedCategory: value
     })
@@ -41,19 +40,21 @@ class Confirmation extends Component {
         filteredValue = this.props.spendings[prop]
       }
     }
-    this.props.postExpense(this.state)
+    this.props.postExpense(this.state, filteredValue)
   }
 
   render() {
     return (
       <Container>
           <Content style={{marginTop:75}}>
+          <Text style={{alignSelf:'center',fontSize:20, paddingBottom:50}}>Does the total match the reciept total?</Text>
           <CustomInput
-            label="props from camera"
+
+            label="Reciept Total"
             placeholder="0.00"
             onChangeText={ this.onInputChange.bind(this)}
             />
-          <Form style={{alignItems:'center'}}>
+          <Form style={{alignItems:'center',paddingTop:25, paddingBottom:25}}>
             <Picker
               mode="dropdown"
               placeholder="Select a category expense"
@@ -70,7 +71,19 @@ class Confirmation extends Component {
               <Item label="Miscellaneous" value="spentMiscellaneous" />
             </Picker>
           </Form>
-          <Button title="hey" onPress={()=>this.onButtonPress()}/>
+          <TouchableOpacity
+          style={{backgroundColor:'green', marginBottom:15, marginLeft:20, marginRight:20, borderRadius: 25,
+          borderWidth: 3,
+          borderColor:'#006600'}}>
+          <Button color='white' title="Re-take photo" onPress={()=>this.onButtonPress()}/>
+          </TouchableOpacity>
+          <TouchableOpacity
+          style={{backgroundColor:'green', marginLeft:20, marginRight:20, borderRadius: 25,
+          borderWidth: 3,
+          borderColor:'#006600'}}>
+          <Button color='white' title="Submit Expense" onPress={()=>this.onButtonPress()}/>
+          </TouchableOpacity>
+
         </Content>
       </Container>
     )

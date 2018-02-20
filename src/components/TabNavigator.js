@@ -6,22 +6,25 @@ import { Container, Header, Content, Tab, Tabs, TabHeading, Icon } from 'native-
 
 import Budget from './Budget';
 import SnapPhoto from './SnapPhoto';
+import Confirmation from './Confirmation'
 import Stats from './Stats';
-
+// <Tab heading="Camera">
+//   <SnapPhoto />
+// </Tab>
 class TabNavigator extends Component {
   render(){
     return(
       <Container>
         <Tabs
           tabBarUnderlineStyle={{backgroundColor:'transparent'}}
-          initialPage={1}
+          initialPage={0}
           tabBarPosition='bottom'
         >
         <Tab heading="Budget">
           <Budget />
         </Tab>
         <Tab heading="Camera">
-          <SnapPhoto />
+          <Confirmation />
         </Tab>
         <Tab heading="Stats">
           <Stats />

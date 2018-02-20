@@ -51,7 +51,7 @@ class Budget extends Component {
           <Text style={{marginTop:35}}></Text>
           <CardSection>
             <CustomInput
-              label="Total Budget$"
+              label="Total Budget"
               placeholder="0.00"
               onChangeText={this.onTotalBudgetChange.bind(this)}
               value = {this.props.total_budget }

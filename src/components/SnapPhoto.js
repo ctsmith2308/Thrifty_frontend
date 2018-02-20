@@ -92,7 +92,7 @@ export default class SnapPhoto extends Component {
           </View>
         );
       }
-}
+  }
 
 
       // <Camera
