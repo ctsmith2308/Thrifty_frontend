@@ -5,11 +5,11 @@ import { Scene, Router, Actions } from 'react-native-router-flux'
 import { Container, Header, Content, Tab, Tabs, TabHeading, Icon } from 'native-base';
 
 import Budget from './Budget';
-import SnapPhoto from './SnapPhoto';
+import Camera from './Camera';
 import Confirmation from './Confirmation'
 import Stats from './Stats';
 // <Tab heading="Camera">
-//   <SnapPhoto />
+//   <Camera />
 // </Tab>
 class TabNavigator extends Component {
   render(){
@@ -24,7 +24,7 @@ class TabNavigator extends Component {
           <Budget />
         </Tab>
         <Tab heading="Camera">
-          <Confirmation />
+          <Camera/>
         </Tab>
         <Tab heading="Stats">
           <Stats />

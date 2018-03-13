@@ -8,10 +8,11 @@ const FluxRouter=()=>{
   return (
     <Router>
     <Scene
-          hideNavBar
-          navBar={null}
-          key="login"
-          component={ LoginForm }/>
+        hideNavBar
+        navBar={null}
+        key="login"
+        component={ LoginForm }
+        />
       <Scene key="tabNavigator"
         hideNavBar
         navBar={null}

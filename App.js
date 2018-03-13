@@ -28,8 +28,8 @@ export default class App extends Component {
   }
 
   render() {
-    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger))
     console.disableYellowBox = true
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger))
     return (
       <Provider store={ store }>
         <FluxRouter/>

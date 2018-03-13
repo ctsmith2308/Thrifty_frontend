@@ -12,6 +12,7 @@
     "native-base": "^2.3.6",
     "react": "16.2.0",
     "react-native": "0.53.0",
+    "react-native-camera": "^1.0.2",
     "react-native-router-flux": "^3.35.0",
     "react-native-simple-gauge": "^0.1.7",
     "react-redux": "^5.0.6",
