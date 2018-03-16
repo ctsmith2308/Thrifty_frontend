@@ -1,13 +1,4 @@
-// import React, { Component } from 'react';
-// import {
-//   AppRegistry,
-//   Dimensions,
-//   StyleSheet,
-//   Text,
-//   TouchableHighlight,
-//   TouchableOpacity,
-//   View
-// } from 'react-native';
+
 //
 // import { Key } from '../apiKey'
 //
@@ -53,64 +44,37 @@
 //         }
 //   }
 //
-//   takePicture = () => {
-//     this.camera.capture()
-//       .then((encodedString) => {
-//         axios.post(googleAPI, {
-//           "requests":[
-//             {
-//               "image":{
-//                 "content": encodedString.data
-//               },
-//               "features":[
-//                 {
-//                   "type":"TEXT_DETECTION",
-//                   "maxResults":1
-//                 }
-//               ]
-//             }
-//           ]
-//         })
-//         .then((response) => {
-//           const receiptContent  = response.data.responses[0].textAnnotations[0].description;
-//           let receiptTotal = this.findTheTotal(receiptContent)
-//
-//           this.setState(previousState => {
-//             return { amount: receiptTotal};
-//           })
-//           Actions.receiptinfo({amount:this.state.amount})
-//         })
-//         .catch(error=>console.log(error));
-//       })
-//       .catch(error=>console.log(error));
-//   }
-//
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <Text>Ehhhy</Text>
-//           </View>
-//         );
-//       }
-//   }
-//   const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       flexDirection: 'row',
-//     },
-//     preview: {
-//       flex: 1,
-//       justifyContent: 'flex-end',
-//       alignItems: 'center'
-//     },
-//     capture: {
-//       flex: 0,
-//       backgroundColor: '#c0392b',
-//       borderRadius: 5,
-//       padding: 10,
-//       margin: 40
-//     }
-//   });
+  // takePicture = () => {
+  //   this.camera.capture()
+  //     .then((encodedString) => {
+  //       axios.post(googleAPI, {
+  //         "requests":[
+  //           {
+  //             "image":{
+  //               "content": encodedString.data
+  //             },
+  //             "features":[
+  //               {
+  //                 "type":"TEXT_DETECTION",
+  //                 "maxResults":1
+  //               }
+  //             ]
+  //           }
+  //         ]
+  //       })
+  //       .then((response) => {
+  //         const receiptContent  = response.data.responses[0].textAnnotations[0].description;
+  //         let receiptTotal = this.findTheTotal(receiptContent)
+  //
+  //         this.setState(previousState => {
+  //           return { amount: receiptTotal};
+  //         })
+  //         Actions.receiptinfo({amount:this.state.amount})
+  //       })
+  //       .catch(error=>console.log(error));
+  //     })
+  //     .catch(error=>console.log(error));
+  // }
 
 
 'use strict';
@@ -123,41 +87,84 @@ import {
   View
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux'
+import axios from 'axios'
 
-export default class Camera extends Component {
+import { captureReceiptTotal } from '../actions/CameraActions'
+
+class Camera extends Component {
+
+  findTheTotal = value => {
+    this.props.captureReceiptTotal(value)
+    Actions.confirmationPage()
+
+    // let result = text.split(/[\n ]/)
+    // let numbers = result.filter((s) => s.match(/^\d+\.\d{2}$/)).map(i => parseFloat(i))
+    // let words = result.filter((s) => s.match(/cash/i))
+    // let index = words[0]
+    // let sorted = numbers.sort(this.sortNumber)
+    // let cash;
+    // let total;
+    // index.toLowerCase() === 'cash' ? cash = true : cash = false
+    // cash === true ? total = sorted[1] : total = sorted[0]
+    // console.log('here is the total', total)
+    // return total
+  }
+
+  sortNumber = ( b, a ) => {
+    return a - b;
+  }
+
+  takePicture = () => {
+    const googleAPI = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCO_8wXhVmfQhKyi00-eVQbg8lc_ImjE8E'
+    let options = { quality: 0.5, base64: true }
+    this.camera.takePictureAsync(options)
+      .then(encodedString => {
+        axios.post(googleAPI, {
+          "requests":[{ "image":{ "content": encodedString.base64}, "features":[{ "type":"TEXT_DETECTION", "maxResults":1}]}]
+        })
+      .then(response => {
+        this.findTheTotal(response.data.responses[0].textAnnotations[0].description)
+        // Actions.confirmationPage()
+      })
+      .catch(error=>console.log(error))
+    })
+    .catch(error=>console.log(error))
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <RNCamera
-            ref={ref => {
-              this.camera = ref;
-            }}
-            style = {styles.preview}
-            type={RNCamera.Constants.Type.back}
-            flashMode={RNCamera.Constants.FlashMode.on}
-            permissionDialogTitle={'Permission to use camera'}
-            permissionDialogMessage={'We need your permission to use your camera phone'}
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style = {styles.preview}
+          type={RNCamera.Constants.Type.back}
+          flashMode={RNCamera.Constants.FlashMode.on}
+          permissionDialogTitle={'Permission to use camera'}
+          permissionDialogMessage={'We need your permission to use your camera phone'}
         />
-        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
-        <TouchableOpacity
+        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
+          <TouchableOpacity
             onPress={this.takePicture.bind(this)}
             style = {styles.capture}
-        >
+          >
             <Text style={{fontSize: 14}}> SNAP </Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
         </View>
       </View>
-    );
+    )
   }
-
-  takePicture = async function() {
-    if (this.camera) {
-      const options = { quality: 0.5, base64: true };
-      const data = await this.camera.takePictureAsync(options)
-      console.log(data.uri);
-    }
-  };
 }
+
+mapStateToProps = ({cameraValue}) => {
+  console.log('im the camera value', cameraValue);
+return { cameraValue }
+}
+
+export default connect(mapStateToProps, { captureReceiptTotal })(Camera)
 
 const styles = StyleSheet.create({
   container: {

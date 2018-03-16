@@ -1,12 +1,19 @@
 import axios from 'axios'
 import { Actions } from 'react-native-router-flux'
 
-export const postExpense = (expense, value) => {
+import { SET_CATEGORY } from './types'
+
+export const postExpense = (user_id, category, total, token) => {
   return (dispatch) => {
-    let sum = Number(value) + Number(expense.input)
-    //post route here 
-    dispatch({
-      type:'dummy'
+    // console.log(user_id, category, total, token);
+    // let sum = Number(total)
+    let postBody = { user_id, category, total }
+    console.log(postBody);
+    axios.post('http://localhost:3000/expendatures/add', postBody, {headers:{'x-access-token':token}})
+    .then(() => {
+      dispatch({
+        type:'dummy'
+      })
     })
   }
 }

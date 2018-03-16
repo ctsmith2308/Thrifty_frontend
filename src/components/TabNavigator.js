@@ -8,9 +8,7 @@ import Budget from './Budget';
 import Camera from './Camera';
 import Confirmation from './Confirmation'
 import Stats from './Stats';
-// <Tab heading="Camera">
-//   <Camera />
-// </Tab>
+
 class TabNavigator extends Component {
   render(){
     return(

@@ -68,10 +68,7 @@ export const budgetGetRequest = (userID, token) => {
     let getURL = `http://localhost:3000/budget/${userID}`
     axios.get(getURL, {headers:{ 'x-access-token':token }})
     .then(response => {
-      console.log('response from get', response);
-      // budgetGetSuccess(dispatch, response.data)
       budgetGetSuccess(dispatch)
-
     })
     .catch( error => {
       console.log('error from apiGetRequest ==>', error);
@@ -79,20 +76,26 @@ export const budgetGetRequest = (userID, token) => {
   }
 }
 
+const postToBudget=(postBody, token) => {
+  axios.post('http://localhost:3000/budget', postBody, {headers:{'x-access-token':token}})
+}
+
+const postToExpendatures=(postBody, token) => {
+  axios.post('http://localhost:3000/expendatures', postBody, {headers:{'x-access-token':token}})
+}
+
 export const budgetPostRequest = (userID, budget, token) => {
   return(dispatch)=>{
-    let postURL = 'http://localhost:3000/budget'
-    let postBody = {user_id:userID}
+    let postBody = { user_id:userID }
     Object.keys(budget).forEach(element => {
       postBody[element] = Number(budget[element])
     })
-    axios.post(postURL, postBody, {headers:{'x-access-token':token}})
-    .then(response => {
-      console.log(response);
-      budgetPostSuccess(dispatch)
-    })
-    .catch( error => {
-      console.log('error from apiPostRequest ==>', error);
+    axios.all([postToBudget(postBody, token), postToExpendatures(postBody, token)])
+      .then(axios.spread((budgetRes, expendatureRes) => {
+        budgetPostSuccess(dispatch)
+      }))
+      .catch( error => {
+        console.log('error from apiPostRequest ==>', error);
     })
   }
 }

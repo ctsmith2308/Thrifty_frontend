@@ -152,7 +152,7 @@ class Stats extends Component {
   }
 }
 
-mapStateToProps=({ userBudget, spendings })=>{
+mapStateToProps=({ userBudget, spendings })=> {
   let { utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous } = userBudget
   let { spentUtilities, spentTransportation, spentGroceries, spentSavings, spentEntertainment, spentClothing, spentEmergency, spentMiscellaneous } = spendings
   return {  utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous,

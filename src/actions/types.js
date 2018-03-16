@@ -17,3 +17,9 @@ export const EMERGENCY_CHANGED = 'emergency_changed'
 export const MISCELLANEOUS_CHANGED = 'miscellaneous_changed'
 export const BUDGET_GET_SUCCESS = 'budget_get_success'
 export const BUDGET_POST_SUCCESS = 'budget_post_success'
+
+//CONFIRMATION ACTIONS
+export const SET_CATEGORY = 'set_category'
+
+//CAMERA ACTIONS
+export const RECEIPT_TOTAL = 'receipt_total'
