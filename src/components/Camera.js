@@ -17,6 +17,19 @@
 //     }
 //   }
 //
+
+// let result = text.split(/[\n ]/)
+// let numbers = result.filter((s) => s.match(/^\d+\.\d{2}$/)).map(i => parseFloat(i))
+// let words = result.filter((s) => s.match(/cash/i))
+// let index = words[0]
+// let sorted = numbers.sort(this.sortNumber)
+// let cash;
+// let total;
+// index.toLowerCase() === 'cash' ? cash = true : cash = false
+// cash === true ? total = sorted[1] : total = sorted[0]
+// console.log('here is the total', total)
+// return total
+
 //   findTheTotal = (text) => {
 //       function sortNumber(b,a) {
 //         return a - b;
@@ -95,30 +108,14 @@ import { captureReceiptTotal } from '../actions/CameraActions'
 
 class Camera extends Component {
 
-  findTheTotal = value => {
-    this.props.captureReceiptTotal(value)
+  findTheTotal = response => {
+    this.props.captureReceiptTotal(response)
     Actions.confirmationPage()
-
-    // let result = text.split(/[\n ]/)
-    // let numbers = result.filter((s) => s.match(/^\d+\.\d{2}$/)).map(i => parseFloat(i))
-    // let words = result.filter((s) => s.match(/cash/i))
-    // let index = words[0]
-    // let sorted = numbers.sort(this.sortNumber)
-    // let cash;
-    // let total;
-    // index.toLowerCase() === 'cash' ? cash = true : cash = false
-    // cash === true ? total = sorted[1] : total = sorted[0]
-    // console.log('here is the total', total)
-    // return total
-  }
-
-  sortNumber = ( b, a ) => {
-    return a - b;
   }
 
   takePicture = () => {
     const googleAPI = 'https://vision.googleapis.com/v1/images:annotate?key=AIzaSyCO_8wXhVmfQhKyi00-eVQbg8lc_ImjE8E'
-    let options = { quality: 0.5, base64: true }
+    let options = { base64: true }
     this.camera.takePictureAsync(options)
       .then(encodedString => {
         axios.post(googleAPI, {
@@ -126,7 +123,6 @@ class Camera extends Component {
         })
       .then(response => {
         this.findTheTotal(response.data.responses[0].textAnnotations[0].description)
-        // Actions.confirmationPage()
       })
       .catch(error=>console.log(error))
     })
@@ -142,7 +138,7 @@ class Camera extends Component {
           }}
           style = {styles.preview}
           type={RNCamera.Constants.Type.back}
-          flashMode={RNCamera.Constants.FlashMode.on}
+          flashMode={RNCamera.Constants.FlashMode.off}
           permissionDialogTitle={'Permission to use camera'}
           permissionDialogMessage={'We need your permission to use your camera phone'}
         />
@@ -160,8 +156,7 @@ class Camera extends Component {
 }
 
 mapStateToProps = ({cameraValue}) => {
-  console.log('im the camera value', cameraValue);
-return { cameraValue }
+  return { cameraValue }
 }
 
 export default connect(mapStateToProps, { captureReceiptTotal })(Camera)
