@@ -37,12 +37,6 @@ class Confirmation extends Component {
   }
 
   onButtonPress = () => {
-    // let filteredValue;
-    // for (prop in this.props.spendings){
-    //   if(prop === this.state.selectedCategory){
-    //     filteredValue = this.props.spendings[prop]
-    //   }
-    // }
     this.props.postExpense(this.props.user_id, this.state.selectedCategory, this.props.total, this.props.token)
   }
 

@@ -23,3 +23,4 @@ export const SET_CATEGORY = 'set_category'
 
 //CAMERA ACTIONS
 export const RECEIPT_TOTAL = 'receipt_total'
+export const LOADING_RECEIPT_DATA = 'loading_receipt_data'
