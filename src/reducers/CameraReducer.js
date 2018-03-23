@@ -1,7 +1,7 @@
-import { RECEIPT_TOTAL, LOADING_RECEIPT_DATA} from '../actions/types'
+import { TOTAL_CHANGED, RECEIPT_TOTAL, LOADING_RECEIPT_DATA } from '../actions/types'
 
 const INITIAL_STATE = {
-  receiptTotal:'',
+  receiptTotal:'12.00',
   loading: false
 }
 
@@ -11,8 +11,10 @@ export default (state= INITIAL_STATE, action) =>{
       return { ...state, receiptTotal:action.payload, loading: false }
     case LOADING_RECEIPT_DATA:
       return { ...state, loading: true }
-    case 'dummy':
-      return { ...state }
+    case TOTAL_CHANGED:
+      return { ...state, receiptTotal: action.payload }
+    // case 'dummy':
+    //   return { ...state }
     default:
     return state
   }

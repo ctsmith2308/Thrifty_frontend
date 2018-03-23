@@ -4,7 +4,7 @@ import { Container, Header, Title, Content, Icon, Text, Right, Body, Left, Picke
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { CustomInput, Card, CardSection  } from './common'
-import { setCategory, postExpense } from '../actions'
+import { categorySelect, changeTotal, postExpense } from '../actions'
 
 const Item = Picker.Item;
 
@@ -13,31 +13,33 @@ class Confirmation extends Component {
   constructor(props) {
     super(props);
       this.state = {
-        input: '',
+        input:'',
         selectedCategory: ''
       }
     }
-
-  valueChange = value => {
-    this.setState(previousState =>{
-      return {
-        ...previousState,
-        selectedCategory: value
-      }
-    })
+  onInputChange(text) {
+    this.props.changeTotal(text)
+    // this.setState(previousState => {
+    //   return {
+    //     ...previousState,
+    //     input:text
+    //   }
+    // })
   }
 
-  onInputChange = text => {
-    this.setState(previousState => {
-      return {
-        ...previousState,
-        input:text
-      }
-    })
+  valueChange = value => {
+    // console.log('here is the value', value);
+    this.props.categorySelect(value)
+    // this.setState(previousState =>{
+    //   return {
+    //     ...previousState,
+    //     selectedCategory: value
+    //   }
+    // })
   }
 
   onButtonPress = () => {
-    this.props.postExpense(this.props.user_id, this.state.selectedCategory, this.props.total, this.props.token)
+    // this.props.postExpense(this.props.user_id, this.props.category, this.props.total, this.props.token)
   }
 
   render() {
@@ -48,14 +50,14 @@ class Confirmation extends Component {
           <CustomInput
             label="Reciept Total"
             placeholder="0.00"
-            onChangeText={ this.onInputChange }
+            onChangeText={ this.onInputChange.bind(this) }
             value = { this.props.total }
             />
           <Form style={{alignItems:'center',paddingTop:25, paddingBottom:25}}>
             <Picker
               mode="dropdown"
               placeholder="Select a category expense"
-              selectedValue={ this.state.selectedCategory }
+              selectedValue={ this.props.category }
               onValueChange={ this.valueChange }
             >
               <Item label="Utilities" value="utilities" />
@@ -85,11 +87,13 @@ class Confirmation extends Component {
     )
   }
 }
-mapStateToProps=({ auth, spendings, cameraValue })=>{
+mapStateToProps=({ auth, spendings, cameraValue, selectedCategory })=>{
   let total = cameraValue.receiptTotal
   let user_id = auth.userID
   let token = auth.token
-  return { spendings, total, token, user_id }
+  let category = selectedCategory.category
+  // console.log('here is the category', category);
+  return { spendings, total, token, user_id, category }
 }
 
-export default connect(mapStateToProps, { setCategory, postExpense })(Confirmation)
+export default connect(mapStateToProps, { categorySelect, changeTotal, postExpense })(Confirmation)

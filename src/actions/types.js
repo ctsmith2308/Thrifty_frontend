@@ -19,6 +19,7 @@ export const BUDGET_GET_SUCCESS = 'budget_get_success'
 export const BUDGET_POST_SUCCESS = 'budget_post_success'
 
 //CONFIRMATION ACTIONS
+export const TOTAL_CHANGED = 'total_changed'
 export const SET_CATEGORY = 'set_category'
 
 //CAMERA ACTIONS
