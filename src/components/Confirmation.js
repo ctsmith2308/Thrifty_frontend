@@ -10,36 +10,18 @@ const Item = Picker.Item;
 
 class Confirmation extends Component {
 
-  constructor(props) {
-    super(props);
-      this.state = {
-        input:'',
-        selectedCategory: ''
-      }
-    }
   onInputChange(text) {
     this.props.changeTotal(text)
-    // this.setState(previousState => {
-    //   return {
-    //     ...previousState,
-    //     input:text
-    //   }
-    // })
   }
 
   valueChange = value => {
-    // console.log('here is the value', value);
     this.props.categorySelect(value)
-    // this.setState(previousState =>{
-    //   return {
-    //     ...previousState,
-    //     selectedCategory: value
-    //   }
-    // })
   }
 
   onButtonPress = () => {
-    // this.props.postExpense(this.props.user_id, this.props.category, this.props.total, this.props.token)
+    console.log('I was pressed');
+    console.log(this.props.user_id, this.props.category, this.props.total, this.props.token);
+    this.props.postExpense(this.props.user_id, this.props.category, this.props.total, this.props.token)
   }
 
   render() {
@@ -92,7 +74,6 @@ mapStateToProps=({ auth, spendings, cameraValue, selectedCategory })=>{
   let user_id = auth.userID
   let token = auth.token
   let category = selectedCategory.category
-  // console.log('here is the category', category);
   return { spendings, total, token, user_id, category }
 }
 

@@ -1,7 +1,7 @@
 import { TOTAL_CHANGED, RECEIPT_TOTAL, LOADING_RECEIPT_DATA } from '../actions/types'
 
 const INITIAL_STATE = {
-  receiptTotal:'12.00',
+  receiptTotal:'',
   loading: false
 }
 

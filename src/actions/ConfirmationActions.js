@@ -16,3 +16,18 @@ export const categorySelect = category => {
     payload: category
   }
 }
+
+export const postExpense = (user_id, category, total, token) => {
+  return (dispatch) => {
+    console.log(user_id, category, total, token);
+    let expenseTotal = Number(total)
+    let postBody = { user_id, category, expenseTotal}
+    console.log('postBody', postBody);
+    axios.post('http://localhost:3000/expendatures', postBody, {headers:{'x-access-token':token}})
+    .then(() => {
+      dispatch({
+        type:'dummy'
+      })
+    })
+  }
+}
