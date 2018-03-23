@@ -9,9 +9,9 @@ totalBudgetChanged, utilitiesChanged, transportationChanged, groceriesChanged, s
 
 class Budget extends Component {
 
-  // componentWillMount(){
-  //   this.props.budgetGetRequest(this.props.userID, this.props.token)
-  // }
+  componentWillMount(){
+    this.props.budgetGetRequest(this.props.userID, this.props.token)
+  }
 
   onTotalBudgetChange(text){
     this.props.totalBudgetChanged(text)
@@ -134,6 +134,7 @@ class Budget extends Component {
 
 mapStateToProps = ( { auth, userBudget } ) => {
   let { userID, token } = auth
+  console.log('this is userid >>>', userID);
   let { total_budget, utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous } = userBudget
 
   return { userID, token, total_budget, userBudget, utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous }

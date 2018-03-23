@@ -18,6 +18,10 @@ const captureReceiptTotal = text => {
 }
 
 export const takePicture = () => {
+  // console.log('I was clicked');
+  // return {
+  //   type:'dummy'
+  // }
   return(dispatch) => {
     dispatch({
      type: LOADING_RECEIPT_DATA

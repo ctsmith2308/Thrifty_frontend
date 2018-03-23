@@ -8,7 +8,7 @@ export const postExpense = (user_id, category, total, token) => {
     // console.log(user_id, category, total, token);
     // let sum = Number(total)
     let postBody = { user_id, category, total }
-    axios.post('http://localhost:3000/expendatures/add', postBody, {headers:{'x-access-token':token}})
+    axios.post('http://localhost:3000/expendatures', postBody, {headers:{'x-access-token':token}})
     .then(() => {
       dispatch({
         type:'dummy'

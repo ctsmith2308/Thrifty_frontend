@@ -2,8 +2,8 @@ import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL, L
 
 const INITIAL_STATE = {
   token: '',
-  email: 'chris@chris.com',
-  password: 'password',
+  email: '',
+  password: '',
   userID: null,
   error: '',
   loading: false

@@ -5,15 +5,15 @@ import {
 } from '../actions/types'
 
 const INITIAL_STATE = {
-  total_budget: '500',
-  utilities:'65',
-  transportation: '54',
-  groceries: '23',
-  savings: '70',
-  entertainment: '50',
-  clothing: '45',
-  emergency: '50',
-  miscellaneous: '32'
+  total_budget: '',
+  utilities:'',
+  transportation: '',
+  groceries: '',
+  savings: '',
+  entertainment: '',
+  clothing: '',
+  emergency: '',
+  miscellaneous: ''
 }
 export default (state = INITIAL_STATE, action) => {
   switch (action.type){

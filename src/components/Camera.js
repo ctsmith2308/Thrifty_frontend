@@ -68,6 +68,7 @@ class Camera extends Component {
       )
     }
   }
+}
 
 mapStateToProps = ({ cameraValue }) => {
   let loading = cameraValue.loading

@@ -11,7 +11,11 @@ const cropDegree = 85;
 const textOffset = width
 const textWidth = size - (textOffset*2);
 const textHeight = size*(1.1 - cropDegree/360) - (textOffset*2);
+
 class Stats extends Component {
+  componentWillMount(){
+    // this.props.budgetGetRequest(this.props.userID, this.props.token)
+  }
 
   render(){
     return(

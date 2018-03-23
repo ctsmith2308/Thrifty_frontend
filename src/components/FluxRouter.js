@@ -31,7 +31,6 @@ const FluxRouter = () => {
       hideNavBar
       navBar={null}
       component={ Camera }
-      initial
     />
     </Router>
   )

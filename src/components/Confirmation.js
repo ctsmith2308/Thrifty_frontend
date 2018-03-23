@@ -18,7 +18,7 @@ class Confirmation extends Component {
       }
     }
 
-  onValueChange = value => {
+  valueChange = value => {
     this.setState(previousState =>{
       return {
         ...previousState,
@@ -56,7 +56,7 @@ class Confirmation extends Component {
               mode="dropdown"
               placeholder="Select a category expense"
               selectedValue={ this.state.selectedCategory }
-              onValueChange={ this.onValueChange }
+              onValueChange={ this.valueChange }
             >
               <Item label="Utilities" value="utilities" />
               <Item label="Transportation" value="transportation" />
@@ -78,7 +78,7 @@ class Confirmation extends Component {
           style={{backgroundColor:'green', marginLeft:20, marginRight:20, borderRadius: 25,
           borderWidth: 3,
           borderColor:'#006600'}}>
-          <Button color='white' title="Submit Expense" onPress={ ()=>this.onButtonPress() }/>
+          <Button color='white' title="Submit Expense" onPress={ () => this.onButtonPress() }/>
           </TouchableOpacity>
         </Content>
       </Container>

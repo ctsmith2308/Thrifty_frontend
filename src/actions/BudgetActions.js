@@ -68,7 +68,8 @@ export const budgetGetRequest = (userID, token) => {
     let getURL = `http://localhost:3000/budget/${userID}`
     axios.get(getURL, {headers:{ 'x-access-token':token }})
     .then(response => {
-      budgetGetSuccess(dispatch)
+      console.log('here is the budget get req', response);
+      budgetGetSuccess(dispatch, response.data)
     })
     .catch( error => {
       console.log('error from apiGetRequest ==>', error);
@@ -80,9 +81,9 @@ const postToBudget=(postBody, token) => {
   axios.post('http://localhost:3000/budget', postBody, {headers:{'x-access-token':token}})
 }
 
-const postToExpendatures=(postBody, token) => {
-  axios.post('http://localhost:3000/expendatures', postBody, {headers:{'x-access-token':token}})
-}
+// const postToExpendatures=(postBody, token) => {
+//   axios.post('http://localhost:3000/expendatures', postBody, {headers:{'x-access-token':token}})
+// }
 
 export const budgetPostRequest = (userID, budget, token) => {
   return(dispatch)=>{
@@ -90,7 +91,7 @@ export const budgetPostRequest = (userID, budget, token) => {
     Object.keys(budget).forEach(element => {
       postBody[element] = Number(budget[element])
     })
-    axios.all([postToBudget(postBody, token), postToExpendatures(postBody, token)])
+    axios.all([postToBudget(postBody, token)])
       .then(axios.spread((budgetRes, expendatureRes) => {
         budgetPostSuccess(dispatch)
       }))
@@ -100,12 +101,10 @@ export const budgetPostRequest = (userID, budget, token) => {
   }
 }
 
-const budgetGetSuccess=(dispatch)=>{
-  // add data prop once psql db is assessed/fixed
-    console.log('data in get success');
+const budgetGetSuccess=(dispatch,data)=>{
     dispatch({
       type: BUDGET_GET_SUCCESS,
-      // payload: data
+      payload: data
     })
 }
 const budgetPostSuccess=(dispatch, budget)=>{

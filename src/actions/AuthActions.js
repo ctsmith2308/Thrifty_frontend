@@ -22,7 +22,9 @@ const apiGetRequest = (dispatch, token) => {
   let getURL = `http://localhost:3000/users/${token}`
   axios.get(getURL, {headers:{ 'x-access-token':token }})
   .then(response => {
+    console.log('dis response', response);
     let userID = response.data.id
+    console.log('here is the userID from auth actions', userID);
     loginUserSuccess(dispatch, userID, token)
   })
   .catch( error => {

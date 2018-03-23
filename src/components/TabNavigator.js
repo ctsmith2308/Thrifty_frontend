@@ -22,7 +22,7 @@ class TabNavigator extends Component {
           <Budget />
         </Tab>
         <Tab heading="Camera">
-          <Camera/>
+          <Confirmation/>
         </Tab>
         <Tab heading="Stats">
           <Stats />
