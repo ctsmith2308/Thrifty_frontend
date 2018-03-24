@@ -19,8 +19,6 @@ class Confirmation extends Component {
   }
 
   onButtonPress = () => {
-    console.log('I was pressed');
-    console.log(this.props.user_id, this.props.category, this.props.total, this.props.token);
     this.props.postExpense(this.props.user_id, this.props.category, this.props.total, this.props.token)
   }
 

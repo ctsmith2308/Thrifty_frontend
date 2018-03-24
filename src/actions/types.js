@@ -21,6 +21,7 @@ export const BUDGET_POST_SUCCESS = 'budget_post_success'
 //CONFIRMATION ACTIONS
 export const TOTAL_CHANGED = 'total_changed'
 export const SET_CATEGORY = 'set_category'
+export const EXPENSE_SUBMITTED = 'expense_submitted'
 
 //CAMERA ACTIONS
 export const RECEIPT_TOTAL = 'receipt_total'

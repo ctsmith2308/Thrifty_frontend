@@ -5,6 +5,8 @@ import { AnimatedGaugeProgress, GaugeProgress } from 'react-native-simple-gauge'
 
 import { Card, CardSection, Input, CustomInput, Button, Spinner } from './common'
 
+import { budgetGetRequest } from '../actions'
+
 const size = 175;
 const width = 15;
 const cropDegree = 85;
@@ -13,9 +15,12 @@ const textWidth = size - (textOffset*2);
 const textHeight = size*(1.1 - cropDegree/360) - (textOffset*2);
 
 class Stats extends Component {
-  componentWillMount(){
-    // this.props.budgetGetRequest(this.props.userID, this.props.token)
+
+  componentDidMount(){
+    this.props.budgetGetRequest(this.props.userID, this.props.token)
   }
+
+//  UTILITIES IS HARDCODED SO YOU NEED TO UPDATE THE STATE UPON LOGGING IN NOT IN THIS COMPONENT BECAUSE COMPONENT WILL MOUNT IS SHIT!!!
 
   render(){
     return(
@@ -27,14 +32,13 @@ class Stats extends Component {
           backgroundColor= "#08923e"
           size={size}
           width={width}
-          fill= { Number(this.props.spentUtilities)/Number(this.props.utilities)*100 }
+          fill= { (Number(this.props.spentUtilities)/ Number(this.props.utilities)) * 100 }
           cropDegree={cropDegree}
         >
           {(fill) => (
             <View style={styles.textView}>
               <Text style={styles.text}>utilities</Text>
               <Text> ${this.props.spentUtilities} | ${this.props.utilities}</Text>
-
             </View>
           )}
         </AnimatedGaugeProgress>
@@ -156,14 +160,18 @@ class Stats extends Component {
   }
 }
 
-mapStateToProps=({ userBudget, spendings })=> {
+mapStateToProps=({ auth, userBudget, spendings })=> {
+  let { userID, token } = auth
   let { utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous } = userBudget
+  let onvert
   let { spentUtilities, spentTransportation, spentGroceries, spentSavings, spentEntertainment, spentClothing, spentEmergency, spentMiscellaneous } = spendings
-  return {  utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous,
+  return {
+  userID, token,
+  utilities, transportation, groceries, savings, entertainment, clothing, emergency, miscellaneous,
   spentUtilities, spentTransportation, spentGroceries, spentSavings, spentEntertainment, spentClothing, spentEmergency, spentMiscellaneous }
 }
 
-export default connect(mapStateToProps, {})(Stats)
+export default connect(mapStateToProps, { budgetGetRequest })(Stats)
 
 const styles = {
   contentContainerStyle:{

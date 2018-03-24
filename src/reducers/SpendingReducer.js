@@ -1,14 +1,14 @@
-import {} from '../actions/types'
+// import {} from '../actions/types'
 
 const INITIAL_STATE = {
-  spentUtilities: '',
-  spentTransportation: '',
-  spentGroceries: '',
-  spentSavings: '',
-  spentEntertainment: '',
-  spentClothing: '',
-  spentEmergency: '',
-  spentMiscellaneous: ''
+  spentUtilities: '1',
+  spentTransportation: '1',
+  spentGroceries: '1',
+  spentSavings: '1',
+  spentEntertainment: '1',
+  spentClothing: '1',
+  spentEmergency: '1',
+  spentMiscellaneous: '1'
 }
 
 export default (state = INITIAL_STATE, action ) => {

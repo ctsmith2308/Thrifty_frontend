@@ -15,14 +15,14 @@ class TabNavigator extends Component {
       <Container>
         <Tabs
           tabBarUnderlineStyle={{backgroundColor:'transparent'}}
-          initialPage={1}
+          initialPage={0}
           tabBarPosition='bottom'
         >
         <Tab heading="Budget">
           <Budget />
         </Tab>
         <Tab heading="Camera">
-          <Confirmation/>
+          <Camera/>
         </Tab>
         <Tab heading="Stats">
           <Stats />
